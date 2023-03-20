@@ -4,21 +4,21 @@ let secondName;
 let age = 0;
 let gender;
 
-while (firstName == "" || firstName == null) {
+while (!firstName) {
   firstName = prompt("*Ваше имя:");
 }
 
-while (secondName == "" || secondName == null) {
+while (!secondName) {
   secondName = prompt("*Ваше отчество:");
 }
 
-while (lastName == "" || lastName == null) {
+while (!lastName) {
   lastName = prompt("*Ваша фамилия:");
 }
 
 do {
   age = +prompt("*Ваш возраст:");
-} while (!isFinite(age) || age < 0 || age > 100 || age == "" || age == null);
+} while (!isFinite(age) || age < 0 || age > 100 || !age);
 
 gender = confirm("*Ваш пол мужской? (ОК - да, Отмена - нет)");
 
