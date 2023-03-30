@@ -2,11 +2,11 @@ const userString = prompt("Your string?");
 
 function vowels1(str) {
   const rusVowels = ["а", "я", "у", "ю", "о", "е", "ё", "э", "и", "ы"];
-
+  const checkString = str.toLowerCase();
   let counter = 0;
 
-  for (let i = 0; i < str.length; i++) {
-    if (rusVowels.includes(str[i])) {
+  for (let i = 0; i < checkString.length; i++) {
+    if (rusVowels.includes(checkString[i])) {
       counter++;
     }
   }
@@ -16,10 +16,10 @@ function vowels1(str) {
 
 function vowels2(str) {
   let set = new Set(["а", "я", "у", "ю", "о", "е", "ё", "э", "и", "ы"]);
-
+  const checkString = str.toLowerCase();
   let counter = 0;
 
-  for (let item of str) {
+  for (let item of checkString) {
     if (set.has(item)) {
       counter++;
     }
