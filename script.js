@@ -19,14 +19,13 @@ function mood(colorsCount) {
   const used = {};
 
   for (let i = 1; i <= colorsCount; i++) {
-    let n = randomDiap(1, 7);
-    let colorName = colors[n];
+    let colorName;
 
-    while (colorName in used) {
+    do {
       //если цвет уже использован, в цикле получаем новый случайный цвет и проверяем
-      n = randomDiap(1, 7);
+      let n = randomDiap(1, 7);
       colorName = colors[n];
-    }
+    } while (colorName in used);
 
     used[colorName] = true; //если цвет не был использован, то запоминаем его и выводим
     console.log(colorName);
