@@ -1,33 +1,36 @@
-const userString = prompt("Your string?");
-
-function vowels1(str) {
-  const rusVowels = ["а", "я", "у", "ю", "о", "е", "ё", "э", "и", "ы"];
-  const checkString = str.toLowerCase();
-  let counter = 0;
-
-  for (let i = 0; i < checkString.length; i++) {
-    if (rusVowels.includes(checkString[i])) {
-      counter++;
-    }
-  }
-
-  return counter;
+function randomDiap(n, m) {
+  return Math.floor(Math.random() * (m - n + 1)) + n;
 }
 
-function vowels2(str) {
-  let set = new Set(["а", "я", "у", "ю", "о", "е", "ё", "э", "и", "ы"]);
-  const checkString = str.toLowerCase();
-  let counter = 0;
+function mood(colorsCount) {
+  const colors = [
+    "",
+    "красный",
+    "оранжевый",
+    "жёлтый",
+    "зелёный",
+    "голубой",
+    "синий",
+    "фиолетовый",
+  ];
 
-  for (let item of checkString) {
-    if (set.has(item)) {
-      counter++;
+  console.log("цветов: " + colorsCount);
+
+  const used = {};
+
+  for (let i = 1; i <= colorsCount; i++) {
+    let n = randomDiap(1, 7);
+    let colorName = colors[n];
+
+    while (colorName in used) {
+      //если цвет уже использован, в цикле получаем новый случайный цвет и проверяем
+      n = randomDiap(1, 7);
+      colorName = colors[n];
     }
-  }
 
-  return counter;
+    used[colorName] = true; //если цвет не был использован, то запоминаем его и выводим
+    console.log(colorName);
+  }
 }
 
-console.log("vovels1 result : " + vowels1(userString));
-
-console.log("vovels2 result : " + vowels2(userString));
+mood(3);
