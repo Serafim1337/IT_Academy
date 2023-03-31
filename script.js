@@ -22,7 +22,7 @@ function mood(colorsCount) {
     let colorName;
 
     do {
-      //если цвет уже использован, в цикле получаем новый случайный цвет и проверяем
+      //сначала получаем цвет, затем, если он был уже использован - повторяем итерацию
       let n = randomDiap(1, 7);
       colorName = colors[n];
     } while (colorName in used);
