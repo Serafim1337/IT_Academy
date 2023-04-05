@@ -6,10 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Roots</title>
     <link rel="stylesheet" href="style.css" />
+
+    <!-- добавим стили mocha для отображения результатов -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.css">
+    <!-- добавляем сам фреймворк mocha -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.js"></script>
+
+    <!-- добавим chai -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/3.5.0/chai.js"></script>
+
   </head>
   <body>
     <input type=button value='корни' onclick='ttt()'>
-<input type=button value='авто-тесты' onclick='squareRootsTests()'>
+    <input type=button value='авто-тесты' onclick='squareRootsTests()'>
+
+    <div id="mocha"></div>
+
     <script src="script.js"></script>
+    <script src="test.js"></script>
+    
   </body>
 </html>
