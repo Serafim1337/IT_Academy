@@ -1,78 +1,73 @@
-const userString = prompt("Your string?");
+// находим корни квадратного уравнения
+    // возвращает массив корней
+    function squareRoots(a,b,c) {
 
-function vowels1(str) {
-  const rusVowels = ["а", "я", "у", "ю", "о", "е", "ё", "э", "и", "ы"];
-  const checkString = str.toLowerCase();
-  let counter = 0;
+      if(a === 0) {
+        return [-c/b];
+      }
 
-  for (let i = 0; i < checkString.length; i++) {
-    if (rusVowels.includes(checkString[i])) {
-      counter++;
-    }
+      const d=b*b-4*a*c; // дискриминант
+
+      if ( d<0 )
+          return []; // нет корней
+
+      if ( d==0 )
+          return [ -b/(2*a) ]; // один корень
+
+      const x1=(-b+Math.sqrt(d))/(2*a);
+      const x2=(-b-Math.sqrt(d))/(2*a);
+      return [ x1, x2 ]; // два корня
   }
 
-  return counter;
-}
+  function squareRootsTests() {
 
-function vowels2(str) {
-  let set = new Set(["а", "я", "у", "ю", "о", "е", "ё", "э", "и", "ы"]);
-  const checkString = str.toLowerCase();
-  let counter = 0;
+      {
+          console.log('тест 1,1,1 -> нет корней');
+          const roots=squareRoots(1,1,1);
+          console.log( (roots.length==0)
+              ?'пройден':'НЕ ПРОЙДЕН!' )
+      }
 
-  for (let item of checkString) {
-    if (set.has(item)) {
-      counter++;
-    }
+      {
+          console.log('тест 1,-2,-3 -> два корня 3,-1');
+          const roots=squareRoots(1,-2,-3);
+          console.log( ((roots.length==2)&&(roots[0]==3)&&(roots[1]==-1))
+              ?'пройден':'НЕ ПРОЙДЕН!' )
+      }
+
+      {
+          console.log('тест -1,-2,15 -> два корня -5,3');
+          const roots=squareRoots(-1,-2,15);
+          console.log( ((roots.length==2)&&(roots[0]==-5)&&(roots[1]==3))
+              ?'пройден':'НЕ ПРОЙДЕН!' )
+      }
+
+      {
+          console.log('тест 1,12,36 -> один корень -6');
+          const roots=squareRoots(1,12,36);
+          console.log( ((roots.length==1)&&(roots[0]==-6))
+              ?'пройден':'НЕ ПРОЙДЕН!' )
+      }
+
+      {
+          console.log('тест 0,5,-10 -> один корень 2');
+          const roots=squareRoots(0,5,-10);
+          console.log( ((roots.length==1)&&(roots[0]==2))
+              ?'пройден':'НЕ ПРОЙДЕН!' )
+      }
+
   }
 
-  return counter;
-}
+  function ttt() {
+      const a=Number(prompt('Введите a'));
+      const b=Number(prompt('Введите b'));
+      const c=Number(prompt('Введите c'));
+      const roots=squareRoots(a,b,c);
 
-function vowels3(str) {
-  const set = new Set(["а", "я", "у", "ю", "о", "е", "ё", "э", "и", "ы"]);
-  const checkString = str.toLowerCase();
-  let counter = 0;
-
-  checkString.split('').forEach(item => {
-    if(set.has(item)) {
-      counter++
-    }
-  });
-
-  return counter;
-}
-
-function vowels4(str) {
-  const set = new Set(["а", "я", "у", "ю", "о", "е", "ё", "э", "и", "ы"]);
-  const checkString = str.toLowerCase();
-
-  const filterResults = checkString.split('').filter(item=>set.has(item));
-
-  const vowelsCount = filterResults.length;
-
-  return vowelsCount;
-}
-
-function vowels5(str) {
-  let set = new Set(["а", "я", "у", "ю", "о", "е", "ё", "э", "и", "ы"]);
-  const checkString = str.toLowerCase();
-  
-  const counter = checkString.split('').reduce((acc,curr)=>{
-    if(set.has(curr)) {
-      acc++;
-    }
-    return acc;
-  },0);
-
-  return counter;
-}
-
-console.log("vovels1 result : " + vowels1(userString));
-
-console.log("vovels2 result : " + vowels2(userString));
-
-console.log("vovels3 result : " + vowels3(userString));
-
-console.log("vovels4 result : " + vowels4(userString));
-
-console.log("vovels5 result : " + vowels5(userString));
+      if ( !roots.length )
+          alert('корней нет!');
+      else if ( roots.length==1 )
+          alert('один корень: '+roots[0]);
+      else
+          alert('два корня: '+roots[0]+' и '+roots[1]);
+  }
