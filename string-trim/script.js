@@ -1,17 +1,28 @@
-let userString;
+function stringTrim(userString) {
 
-while (!userString) {
-    userString = prompt('Your string:', ' <-Left space. Right space.-> ');
-    if (userString.indexOf(" ") == 0) {
-        userString = userString.slice(userString.indexOf(" ") + 1)
-        userString = '*' + userString;
+    let startSpaces = 0;
+    let endSpaces = 0;
+    const stringLength = userString.length;
 
+    for (let pos = 0; pos < stringLength; pos++) {
+        if (userString.charAt(pos) == " ") {
+            startSpaces++;
+        } else {
+            break;
+        }
     }
 
-    if (userString.lastIndexOf(' ') == userString.length - 1) {
-        userString = userString.slice(0, -1);
-        userString += '*';
+    for (let pos = stringLength - 1; pos > 0; pos--) {
+        if (userString.charAt(pos) == " ") {
+            endSpaces++;
+        } else {
+            break;
+        }
     }
 
-    alert(userString);
+    userString = userString.slice(startSpaces, stringLength - endSpaces);
+    return "*" + userString + "*";
 }
+
+const userString = prompt('Your string:', '          <-Left space. Right space.->           ');
+alert(stringTrim(userString));
