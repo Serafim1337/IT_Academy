@@ -1,15 +1,15 @@
 class HashStorageClass {
     publicHash = {};
 
-    addValue = function (key, value) {
+    addValue(key, value) {
         this.publicHash[key] = value;
     }
 
-    getValue = function (key) {
+    getValue(key) {
         return (key in this.publicHash) ? this.publicHash[key] : undefined;
     }
 
-    deleteValue = function (key) {
+    deleteValue(key) {
         if (key in this.publicHash) {
             delete this.publicHash[key];
             return true;
@@ -18,7 +18,7 @@ class HashStorageClass {
         }
     }
 
-    getKeys = function () {
+    getKeys() {
         return Object.keys(this.publicHash);
     }
 }
