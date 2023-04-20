@@ -1,0 +1,23 @@
+body,html {
+    margin: 0;
+}
+
+.button-block {
+    width: fit-content;
+    margin: 0 auto;
+    padding-top: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.button {
+    border: none;
+    padding: 10px;
+    background-color: orange;
+    font-weight: 900;
+}
+
+.button:hover {
+    cursor: pointer;
+}
