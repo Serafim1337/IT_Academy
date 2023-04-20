@@ -57,8 +57,10 @@ getDrinkButton.addEventListener('click', function (e) {
         drinkName = prompt('Название напитка:', 'Кровавая Мэри');
     };
 
-    if (drinkStorage.getValue(drinkName)) {
-        const [hasAlcohol, recipe] = drinkStorage.getValue(drinkName);
+    const drinkInfo = drinkStorage.getValue(drinkName);
+
+    if (drinkInfo) {
+        const [hasAlcohol, recipe] = drinkInfo;
         alert(`напиток: ${drinkName}\nалкогольный: ${hasAlcohol}\nрецепт приготовления: ${recipe}`);
     } else {
         alert('Такой напиток отсутствует.')
