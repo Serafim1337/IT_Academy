@@ -1,9 +1,4 @@
 class HashStorageClass {
-
-    constructor() {
-
-    }
-
     publicHash = {};
 
     addValue = function (key, value) {
