@@ -4,20 +4,19 @@ function stringTrim(userString) {
     let endSpaces = 0;
     const stringLength = userString.length;
 
-    for (let pos = 0; pos < stringLength; pos++) {
-
-        const endOfString = pos == stringLength - 1 && userString.charAt(pos) == " ";
-
-        if (endOfString) {
-            console.log('All string consists of spaces.');
-            return userString;
-        }
-
+    for (var pos = 0; pos < stringLength; pos++) {
         if (userString.charAt(pos) == " ") {
             startSpaces++;
         } else {
             break;
         }
+    }
+
+    const endOfString = pos == stringLength && userString.charAt(pos - 1) == " ";
+
+    if (endOfString) {
+        console.log('All string consists of spaces.');
+        return userString;
     }
 
     for (let pos = stringLength - 1; pos > 0; pos--) {
