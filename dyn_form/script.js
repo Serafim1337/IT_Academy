@@ -1,109 +1,104 @@
 function createDynamicForm(currentForm, description) {
-    const formElements = [];
+    const formElementsArray = [];
 
     for (let item of description) {
+
         // проверить есть ли данные поля
         const itemVariants = item.variants;
         const itemCaption = item.caption;
 
-        // в любом случае создается инпут определенного типа
-        const itemType = setType(item.kind);
-        let input;
-        if (itemType == 'textarea') {
-            input = document.createElement('textarea');
-            input.type = itemType;
-        } else if (itemType == 'select') {
-            input = document.createElement('select');
-            input.type = itemType;
-        } else if (itemType == 'radio') {
-            input = document.createElement('div');
-        }
-        else {
-            input = document.createElement('input');
-            input.type = itemType;
+        // в любом случае создается элемент формы определенного типа
+        let formElement = document.createElement('input');
 
+        switch (item.kind) {
+            case 'longtext':
+            case 'shorttext':
+                formElement.type = 'text';
+                break;
+            case 'number':
+                formElement.type = 'number';
+                break;
+            case 'combo':
+                // перезапись элемента формы, если необходим другой тег
+                formElement = document.createElement('select');
+                break;
+            case 'radio':
+                formElement = document.createElement('div');
+                break;
+            case 'memo':
+                formElement = document.createElement('textarea');
+                break;
+            case 'check':
+                formElement.type = 'checkbox';
+                break;
+            case 'submit':
+                formElement.type = 'submit';
+                break;
         }
 
-        // если нет данного поля то это не кнопка
+        // если нет поля caption то это не кнопка
         if (!itemCaption) {
 
             // в любом случае есть лейбл 
             const label = document.createElement('label');
             label.textContent = item.label;
 
-            // обрабатывается содержимое инпута
-            if (itemType !== 'radio') {
-                input.name = item.name;
+            // обрабатывается содержимое элемента формы
+            if (item.kind !== 'radio') {
+                formElement.name = item.name;
             }
 
+            // в случае если есть свойство с массивом вариантов
             if (itemVariants) {
-                switch (itemType) {
-                    case 'select':
+                switch (item.kind) {
+                    case 'combo':
                         for (let option of itemVariants) {
-                            console.log(option);
                             const opt = document.createElement('option');
                             opt.value = option.value;
                             opt.textContent = option.text;
-                            input.append(opt);
+                            formElement.append(opt);
                         }
                         break;
                     case 'radio':
                         for (let option of itemVariants) {
 
                             const radio = document.createElement('input');
-                            radio.type = itemType;
+                            radio.type = item.kind;
                             radio.name = item.name;
                             radio.value = option.value;
 
                             const span = document.createElement('span');
                             span.textContent = option.text;
 
-                            input.append(radio);
-                            input.append(span);
+                            formElement.append(radio);
+                            formElement.append(span);
                         }
                         break;
                 }
             }
 
-
-            label.append(input);
-
-
+            label.append(formElement);
 
             // сохранение элемента
-            formElements.push(label);
+            formElementsArray.push(label);
 
-            // создание кнопки в случае наличия поля
+            // создание кнопки в случае наличия поля caption
         } else {
-            input.value = itemCaption;
-            formElements.push(input);
+            formElement.value = itemCaption;
+            formElementsArray.push(formElement);
         }
 
     }
-
-    console.log(formElements);
 
     // добавление элементов
     const fieldSet = document.createElement('fieldset');
     currentForm.append(fieldSet);
 
-    for (let element of formElements) {
+    for (let element of formElementsArray) {
         fieldSet.append(element);
     }
 }
 
-function setType(itemKind) {
-    switch (itemKind) {
-        case 'longtext': return 'text';
-        case 'shorttext': return 'text';
-        case 'number': return itemKind;
-        case 'combo': return 'select';
-        case 'radio': return itemKind;
-        case 'memo': return 'textarea';
-        case 'check': return 'checkbox';
-        case 'submit': return itemKind;
-    }
-}
 
 const form = document.forms.dynForm;
 
