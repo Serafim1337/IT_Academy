@@ -4,7 +4,7 @@ function stringTrim(userString) {
     let endSpaces = 0;
     const stringLength = userString.length;
 
-    for (var pos = 0; pos < stringLength; pos++) {
+    for (let pos = 0; pos < stringLength; pos++) {
         if (userString.charAt(pos) == " ") {
             startSpaces++;
         } else {
@@ -12,11 +12,11 @@ function stringTrim(userString) {
         }
     }
 
-    const endOfString = pos == stringLength && userString.charAt(pos - 1) == " ";
+    const endOfString = startSpaces == stringLength;
 
     if (endOfString) {
         console.log('All string consists of spaces.');
-        return userString;
+        return '';
     }
 
     for (let pos = stringLength - 1; pos > 0; pos--) {
