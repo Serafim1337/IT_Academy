@@ -100,7 +100,8 @@ function createDynamicForm(currentForm, description) {
 }
 
 
-const form = document.forms.dynForm;
+const form1 = document.forms.dynForm1;
+const form2 = document.forms.dynForm2;
 
 const formDef1 =
     [
@@ -130,5 +131,5 @@ const formDef2 =
         { caption: 'Зарегистрироваться', kind: 'submit' },
     ];
 
-createDynamicForm(form, formDef1);
-createDynamicForm(form, formDef2);
+createDynamicForm(form1, formDef1);
+createDynamicForm(form2, formDef2);
