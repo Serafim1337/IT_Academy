@@ -1,0 +1,27 @@
+.container {
+    margin: 0 auto;
+    max-width: 1440px;
+    display: flex;
+    justify-content: center;
+}
+.catalog-form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 400px;
+    padding-top: 50px;
+}
+.outer-label {
+    display: flex;
+    position: relative;
+}
+.type-input {
+    flex: 1;
+}
+
+.error {
+    position: absolute;
+    left: 105%;
+    color: red;
+    width: 300px;
+}

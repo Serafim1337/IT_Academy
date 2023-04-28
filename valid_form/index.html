@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>valid_form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <section class="container">
+        <form class="catalog-form" name="catalogForm" method="post" action="https://fe.it-academy.by/TestForm.php"
+            novalidate>
+            <label class="outer-label">Разработчики:
+                <input type="text" name="devName" class="type-input">
+                <span class="error" hidden>Поле должно иметь не более 30-ти символов и быть заполненным.</span>
+            </label>
+            <label class="outer-label">Название сайта:
+                <input type="text" name="siteName" class="type-input">
+            </label>
+            <label class="outer-label">URL сайта:
+                <input type="text" name="siteURL" class="type-input">
+            </label>
+            <label class="outer-label">Дата запуска сайта:
+                <input type="date" name="launchDate" class="type-input">
+            </label>
+            <label class="outer-label">Посетителей в сутки:
+                <input type="number" name="visitsNumber" class="type-input">
+            </label>
+            <label class="outer-label">E-mail для связи:
+                <input type="email" name="contactEmail" class="type-input">
+            </label>
+            <label class="outer-label">Рубрика каталога:
+                <select name="catalogTopic">
+                    <option value="health"></option>
+                    <option value="comfort"></option>
+                    <option value="appliances"></option>
+                </select>
+            </label>
+            <label class="outer-label">
+                Размещение:
+                <label>
+                    <input type="radio" value="free" name="hostingType">
+                    Бесплатное
+                </label>
+                <label>
+                    <input type="radio" value="paid" name="hostingType">
+                    платное
+                </label>
+                <label>
+                    <input type="radio" value="vip" name="hostingType">
+                    VIP
+                </label>
+            </label>
+            <label class="outer-label">Разрешить отзывы:
+                <input type="checkbox" name="feedbackCheck">
+            </label>
+            <label class="outer-label">Описание сайта:
+                <textarea name="siteDesc" class="type-input"></textarea>
+            </label>
+            <input type="submit" class="button-submit">
+        </form>
+    </section>
+    <script src="script.js"></script>
+</body>
+
+</html>
