@@ -15,29 +15,38 @@
             novalidate>
             <label class="outer-label">Разработчики:
                 <input type="text" name="devName" class="type-input">
-                <span class="error" hidden>Поле должно иметь не более 30-ти символов и быть заполненным.</span>
+                <span class="error" hidden>Должно иметь не более 30-ти символов и быть заполненным.</span>
             </label>
             <label class="outer-label">Название сайта:
                 <input type="text" name="siteName" class="type-input">
+                <span class="error" hidden>Должно включать "global" и быть заполненным.</span>
             </label>
             <label class="outer-label">URL сайта:
                 <input type="text" name="siteURL" class="type-input">
+                <span class="error" hidden>Должно включать "https://", заканчиваться на ".com" и быть
+                    заполненным.</span>
             </label>
             <label class="outer-label">Дата запуска сайта:
                 <input type="date" name="launchDate" class="type-input">
+                <span class="error" hidden>Должно быть корректным, не старше 01.01.2016</span>
             </label>
             <label class="outer-label">Посетителей в сутки:
                 <input type="number" name="visitsNumber" class="type-input">
+                <span class="error" hidden>Должно быть положительным числом не более 1 000 000 и быть
+                    заполненным.</span>
             </label>
             <label class="outer-label">E-mail для связи:
                 <input type="email" name="contactEmail" class="type-input">
+                <span class="error" hidden>Должно включать "@", оканчиваться на ".com" и быть заполненным.</span>
             </label>
             <label class="outer-label">Рубрика каталога:
                 <select name="catalogTopic">
-                    <option value="health"></option>
-                    <option value="comfort"></option>
-                    <option value="appliances"></option>
+                    <option value="">Выберите</option>
+                    <option value="health">здоровье</option>
+                    <option value="comfort">домашний уют</option>
+                    <option value="appliances">бытовая техника</option>
                 </select>
+                <span class="error" hidden>Должно быть заполненным.</span>
             </label>
             <label class="outer-label">
                 Размещение:
@@ -53,12 +62,15 @@
                     <input type="radio" value="vip" name="hostingType">
                     VIP
                 </label>
+                <span class="error" hidden>Должно быть заполненным.</span>
             </label>
             <label class="outer-label">Разрешить отзывы:
                 <input type="checkbox" name="feedbackCheck">
+                <span class="error" hidden>Должно быть заполненным.</span>
             </label>
             <label class="outer-label">Описание сайта:
                 <textarea name="siteDesc" class="type-input"></textarea>
+                <span class="error" hidden>Должно быть от 100 до 1 000 символов</span>
             </label>
             <input type="submit" class="button-submit">
         </form>
