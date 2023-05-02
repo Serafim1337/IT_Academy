@@ -4,6 +4,7 @@
     catalogForm.elements.siteName.addEventListener('blur', siteNameValidator);
     catalogForm.elements.siteURL.addEventListener('blur', siteURLValidator);
     catalogForm.elements.launchDate.addEventListener('blur', launchDateValidator);
+    catalogForm.elements.launchDate.addEventListener('change', launchDateValidator);
     catalogForm.elements.visitsNumber.addEventListener('blur', visitsNumberValidator);
     catalogForm.elements.contactEmail.addEventListener('blur', contactEmailValidator);
     catalogForm.elements.catalogTopic.addEventListener('blur', catalogTopicValidator);
@@ -208,7 +209,7 @@ function contactEmailValidator(contactEmail, submitValidation = false) {
         const value = contactEmail.value;
 
         if (value == "" || !value.includes('@') || !value.endsWith('.com')) {
-            return validationFailHandler(contactEmail);
+            return validationFailHandler(contactEmail, true);
         }
 
         return validationSuccessHandler(contactEmail);
