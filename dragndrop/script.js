@@ -2,17 +2,23 @@ const imagesPack = document.querySelectorAll('img');
 
 let __zIndexGlobal = 0, __targetGlobal;
 
-for (let img of imagesPack) {
-    img.addEventListener('dragstart', function (e) {
-        e.preventDefault();
-    });
+window.addEventListener('load', function (e) {
+    for (let img of imagesPack) {
+        img.addEventListener('dragstart', function (e) {
+            e.preventDefault();
+        });
 
-    img.addEventListener('mouseenter', function (e) {
-        img.style.cursor = 'grab'
-    })
+        img.addEventListener('mouseenter', function (e) {
+            img.style.cursor = 'grab'
+        })
+        resetElementPos(img);
+    }
+    for (let img of imagesPack) {
+        img.style.position = 'absolute';
+    }
+})
 
-    resetElementPos(img);
-}
+
 
 document.addEventListener('mousedown', function (e) {
     if (Array.from(imagesPack).includes(e.target)) {
@@ -34,9 +40,7 @@ document.addEventListener('mouseup', function (e) {
     }
 })
 
-for (let img of imagesPack) {
-    img.style.position = 'absolute';
-}
+
 
 function resetElementPos(element) {
     const cords = getElementCords(element);
@@ -60,23 +64,23 @@ function getElementCords(element) {
 }
 
 function moveHandler(e) {
-    if (Array.from(imagesPack).includes(e.target)) {
-        const currentImage = __targetGlobal;
 
-        const cords = getElementCords(currentImage)
+    const currentImage = __targetGlobal;
 
-        const currentX = e.pageX;
-        const currentY = e.pageY;
+    const cords = getElementCords(currentImage)
 
-        const xDelta = currentX - currentImage.dataset.__xCord;
-        const yDelta = currentY - currentImage.dataset.__yCord;
+    const currentX = e.pageX;
+    const currentY = e.pageY;
 
-        currentImage.dataset.__xCord = currentX;
-        currentImage.dataset.__yCord = currentY;
+    const xDelta = currentX - currentImage.dataset.__xCord;
+    const yDelta = currentY - currentImage.dataset.__yCord;
 
-        currentImage.style.zIndex = __zIndexGlobal++;
+    currentImage.dataset.__xCord = currentX;
+    currentImage.dataset.__yCord = currentY;
 
-        currentImage.style.left = cords.left + xDelta + 'px';
-        currentImage.style.top = cords.top + yDelta + 'px';
-    }
+    currentImage.style.zIndex = __zIndexGlobal++;
+
+    currentImage.style.left = cords.left + xDelta + 'px';
+    currentImage.style.top = cords.top + yDelta + 'px';
+
 }
