@@ -60,21 +60,23 @@ function getElementCords(element) {
 }
 
 function moveHandler(e) {
-    const currentImage = __targetGlobal;
+    if (Array.from(imagesPack).includes(e.target)) {
+        const currentImage = __targetGlobal;
 
-    const cords = getElementCords(currentImage)
+        const cords = getElementCords(currentImage)
 
-    const currentX = e.pageX;
-    const currentY = e.pageY;
+        const currentX = e.pageX;
+        const currentY = e.pageY;
 
-    const xDelta = currentX - currentImage.dataset.__xCord;
-    const yDelta = currentY - currentImage.dataset.__yCord;
+        const xDelta = currentX - currentImage.dataset.__xCord;
+        const yDelta = currentY - currentImage.dataset.__yCord;
 
-    currentImage.dataset.__xCord = currentX;
-    currentImage.dataset.__yCord = currentY;
+        currentImage.dataset.__xCord = currentX;
+        currentImage.dataset.__yCord = currentY;
 
-    currentImage.style.zIndex = __zIndexGlobal++;
+        currentImage.style.zIndex = __zIndexGlobal++;
 
-    currentImage.style.left = cords.left + xDelta + 'px';
-    currentImage.style.top = cords.top + yDelta + 'px';
+        currentImage.style.left = cords.left + xDelta + 'px';
+        currentImage.style.top = cords.top + yDelta + 'px';
+    }
 }
