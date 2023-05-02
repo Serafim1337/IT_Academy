@@ -15,19 +15,23 @@ for (let img of imagesPack) {
 }
 
 document.addEventListener('mousedown', function (e) {
-    __targetGlobal = e.target;
-    const img = __targetGlobal;
+    if (Array.from(imagesPack).includes(e.target)) {
+        __targetGlobal = e.target;
+        const img = __targetGlobal;
 
-    img.style.cursor = 'grabbing'
-    img.dataset.__xCord = e.pageX;
-    img.dataset.__yCord = e.pageY;
-    document.addEventListener('mousemove', moveHandler);
+        img.style.cursor = 'grabbing'
+        img.dataset.__xCord = e.pageX;
+        img.dataset.__yCord = e.pageY;
+        document.addEventListener('mousemove', moveHandler);
+    }
 })
 
 document.addEventListener('mouseup', function (e) {
-    const img = e.target;
-    img.style.cursor = 'grab';
-    document.removeEventListener('mousemove', moveHandler);
+    if (Array.from(imagesPack).includes(e.target)) {
+        const img = e.target;
+        img.style.cursor = 'grab';
+        document.removeEventListener('mousemove', moveHandler);
+    }
 })
 
 for (let img of imagesPack) {
