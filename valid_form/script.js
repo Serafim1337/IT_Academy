@@ -8,6 +8,7 @@
     catalogForm.elements.visitsNumber.addEventListener('blur', visitsNumberValidator);
     catalogForm.elements.contactEmail.addEventListener('blur', contactEmailValidator);
     catalogForm.elements.catalogTopic.addEventListener('blur', catalogTopicValidator);
+    catalogForm.elements.catalogTopic.addEventListener('change', catalogTopicValidator);
     catalogForm.elements.siteDesc.addEventListener('blur', siteDescValidator);
 
     const hostingTypeButtons = document.querySelectorAll('[name=hostingType]');
@@ -229,7 +230,7 @@ function catalogTopicValidator(catalogTopic, submitValidation = false) {
     if (submitValidation) {
         const value = catalogTopic.value;
 
-        if (value == '') {
+        if (value == '' || value == 'health') {
             return validationFailHandler(catalogTopic, true);
         }
 
@@ -237,7 +238,7 @@ function catalogTopicValidator(catalogTopic, submitValidation = false) {
     } else {
         const value = window.event.target.value;
 
-        if (value == '') {
+        if (value == '' || value == 'health') {
             return validationFailHandler(window.event.target);
         }
 
