@@ -11,9 +11,13 @@ const SECOND_ARROW_SCALE = 2.3;
 const SECOND_ARROW_INTERVAL = 1000;
 
 const CLOCK_SYSTEM = 12;
+const CLOCK_REFRESH_INTERVAL = 1000;
+const MINUTES_IN_DAY = 720;
+const MINUTES_IN_HOUR = 60;
+const SECONDS_IN_MINUTE = 60;
+
 
 const createButton = document.querySelector('.input-button');
-
 createButton.addEventListener('click', createClockHandler);
 
 function createClockHandler(e) {
@@ -21,8 +25,6 @@ function createClockHandler(e) {
 
     if (inputNumber >= 200 && inputNumber <= 1000) {
         createClockFace(inputNumber);
-    } else {
-        alert('Inappropriate size');
     }
 
 }
@@ -83,7 +85,7 @@ function createTimeField(clockFace, currentSize) {
     const minute = timeField.querySelector('#minute');
     const second = timeField.querySelector('#second');
     updateTime(hour, minute, second);
-    setInterval(() => { updateTime(hour, minute, second) }, 1000);
+    setInterval(() => { updateTime(hour, minute, second) }, CLOCK_REFRESH_INTERVAL);
 }
 
 function updateTime(hour, minute, second) {
@@ -111,9 +113,9 @@ function createHourArrow(clockFace, currentSize) {
     arrow.style.left = clockFace.offsetLeft + clockFace.offsetWidth / 2 + 'px';
     arrow.style.top = clockFace.offsetTop + clockFace.offsetHeight / 2 - arrow.offsetHeight + 'px';
 
-    const shift = DEG_IN_CIRCLE / 720;
+    const shift = DEG_IN_CIRCLE / MINUTES_IN_DAY;
     const hours = new Date().getHours() > CLOCK_SYSTEM ? new Date().getHours() - CLOCK_SYSTEM : new Date().getHours();
-    const minutes = hours * 60 + new Date().getMinutes();
+    const minutes = hours * MINUTES_IN_HOUR + new Date().getMinutes();
 
     let currentPos = minutes * shift;
 
@@ -137,7 +139,7 @@ function createMinuteArrow(clockFace, currentSize) {
     arrow.style.left = clockFace.offsetLeft + clockFace.offsetWidth / 2 + 'px';
     arrow.style.top = clockFace.offsetTop + clockFace.offsetHeight / 2 - arrow.offsetHeight + 'px';
 
-    const shift = DEG_IN_CIRCLE / 60;
+    const shift = DEG_IN_CIRCLE / MINUTES_IN_HOUR;
     let currentPos = new Date().getMinutes() * shift;
 
     arrow.style.transform = `rotate(${currentPos}deg)`;
@@ -161,7 +163,7 @@ function createSecondArrow(clockFace, currentSize) {
     arrow.style.left = clockFace.offsetLeft + clockFace.offsetWidth / 2 + 'px';
     arrow.style.top = clockFace.offsetTop + clockFace.offsetHeight / 2 - arrow.offsetHeight + 'px';
 
-    const shift = DEG_IN_CIRCLE / 60;
+    const shift = DEG_IN_CIRCLE / SECONDS_IN_MINUTE;
     let currentPos = new Date().getSeconds() * shift;
 
     arrow.style.transform = `rotate(${currentPos}deg)`;

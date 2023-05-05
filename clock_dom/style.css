@@ -45,7 +45,8 @@ html,body {
 .hour-arrow {
     background-color: black;
     border-radius: 40%;
-    width: 10px;
+    width: 13px;
+    border: 1px solid green;
     position: absolute;
     transform-origin: bottom;
 }
@@ -54,6 +55,7 @@ html,body {
     background-color: black;
     border-radius: 40%;
     width: 6px;
+    border: 1px solid red;
     position: absolute;
     transform-origin: bottom;
 }
@@ -62,6 +64,7 @@ html,body {
     background-color: black;
     border-radius: 30%;
     width: 3px;
+    border: 1px solid blue;
     position: absolute;
     transform-origin: bottom;
 }
