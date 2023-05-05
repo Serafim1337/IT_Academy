@@ -1,0 +1,67 @@
+html,body {
+    margin: 0;
+}
+
+.container {
+    margin: 0 auto;
+    width: fit-content;
+}
+
+.clock-block {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.clock-face {
+    background-color: orange;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+}
+
+.hours-block {
+    width: 100%;
+    height: 100%;
+}
+
+.clock-hour-point {
+    background-color: green;
+    border-radius: 50%;
+    text-align: center;
+    position: absolute;
+}
+
+.time-field{
+    position: absolute;
+}
+
+.input-block {
+    display: flex;
+    justify-content: space-around;
+}
+
+.hour-arrow {
+    background-color: black;
+    border-radius: 40%;
+    width: 10px;
+    position: absolute;
+    transform-origin: bottom;
+}
+
+.minute-arrow {
+    background-color: black;
+    border-radius: 40%;
+    width: 6px;
+    position: absolute;
+    transform-origin: bottom;
+}
+
+.second-arrow {
+    background-color: black;
+    border-radius: 30%;
+    width: 3px;
+    position: absolute;
+    transform-origin: bottom;
+}

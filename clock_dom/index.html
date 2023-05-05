@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>clock_dom</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="clock-block">
+            <div class="clock-face">
+                <div class="hours-block"></div>
+                <div class="time-field" hidden>
+                    <span id="hour">__</span>:
+                    <span id="minute">__</span>:
+                    <span id="second">__</span>
+                </div>
+                <div class="hour-arrow" hidden></div>
+                <div class="minute-arrow" hidden></div>
+                <div class="second-arrow" hidden></div>
+            </div>
+        </div>
+        <div class="input-block">
+            <input type="number" class="input-number" placeholder="Width:" value="300">
+            <input type="button" class="input-button" value="Create 200-1000">
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
