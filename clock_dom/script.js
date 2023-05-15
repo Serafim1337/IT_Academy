@@ -6,13 +6,10 @@ const HOUR_POINT_SCALE = 10;
 
 const HOUR_ARROW_SCALE_H = 4;
 const HOUR_ARROW_SCALE_W = 23;
-const HOUR_ARROW_INTERVAL = 1000 * 60;
 const MINUTE_ARROW_SCALE_H = 3;
 const MINUTE_ARROW_SCALE_W = 50;
-const MINUTE_ARROW_INTERVAL = 1000 * 60;
 const SECOND_ARROW_SCALE_H = 2.3;
 const SECOND_ARROW_SCALE_W = 100;
-const SECOND_ARROW_INTERVAL = 1000;
 
 const FONT_SCALE = 18;
 
@@ -60,7 +57,7 @@ function createClockFace(currentSize) {
     createSecondArrow(clockFace, currentSize);
 
     globalTimeHandler();
-    const timerId = setInterval(globalTimeHandler,1000);
+    const timerId = setInterval(globalTimeHandler,CLOCK_REFRESH_INTERVAL);
 }
 
 // определение общего таймера
