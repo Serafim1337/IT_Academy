@@ -15,7 +15,16 @@ function customMap(func=null){
 }
 
 Array.prototype.__map = customMap;
+
 let test =  [1,2,3];
 console.log(test);
-let result = test.__map((item)=>item*item);
-console.log(result);
+
+let result1 = test.__map(func);
+console.log(result1);
+
+let result2 = test.__map((item)=>item*item);
+console.log(result2);
+
+function func(item) {
+  return item * 10;
+}
