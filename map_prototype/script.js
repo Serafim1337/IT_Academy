@@ -1,6 +1,15 @@
-function customMap(func=null){
-  if(func === null) {
-    return undefined;
+function customMap(func){
+
+  try {
+    func.call();
+  } catch (e) {
+    throw new Error ({ 
+          name:        "Custom Map Error", 
+          level:       "Show Stopper", 
+          message:     "check __map method call", 
+          htmlMessage: "check __map method call",
+          toString:    function(){return this.name + ": " + this.message;} 
+        })
   }
 
   let array = this;
@@ -29,5 +38,5 @@ function func(item) {
   return item * 10;
 }
 
-let result3 = [].__map((item)=>item*item);
+let result3 = [1,2,3].__map();
 console.log(result3);
