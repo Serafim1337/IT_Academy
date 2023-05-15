@@ -2,13 +2,19 @@ const DEG_IN_CIRCLE = 360;
 
 const HOURS_POS_ANGLE = 30;
 const HOURS_POS_RADIUS_SCALE = 2.3;
+const HOUR_POINT_SCALE = 10;
 
-const HOUR_ARROW_SCALE = 4;
+const HOUR_ARROW_SCALE_H = 4;
+const HOUR_ARROW_SCALE_W = 23;
 const HOUR_ARROW_INTERVAL = 1000 * 60;
-const MINUTE_ARROW_SCALE = 3;
+const MINUTE_ARROW_SCALE_H = 3;
+const MINUTE_ARROW_SCALE_W = 50;
 const MINUTE_ARROW_INTERVAL = 1000 * 60;
-const SECOND_ARROW_SCALE = 2.3;
+const SECOND_ARROW_SCALE_H = 2.3;
+const SECOND_ARROW_SCALE_W = 100;
 const SECOND_ARROW_INTERVAL = 1000;
+
+const FONT_SCALE = 18;
 
 const CLOCK_SYSTEM = 12;
 const CLOCK_REFRESH_INTERVAL = 1000;
@@ -64,7 +70,7 @@ function globalTimeHandler() {
     const minuteValue = currentTime.getMinutes();
     const secondValue = currentTime.getSeconds();
 
-    updateTime(hourValue, minuteValue, secondValue);
+    debounceSerie(updateTime(hourValue, minuteValue, secondValue),1000,false);
 
     posHourArrow(hourValue,minuteValue,secondValue);
     posMinuteArrow(minuteValue,secondValue);
@@ -79,8 +85,9 @@ function createHourPoints(clockFace, hoursBlock, currentSize) {
         const hourPoint = document.createElement('div');
         hourPoint.textContent = i;
         hourPoint.className = 'clock-hour-point'
-        hourPoint.style.width = currentSize / 10 + 'px';
-        hourPoint.style.height = currentSize / 10 + 'px';
+        hourPoint.style.width = currentSize / HOUR_POINT_SCALE + 'px';
+        hourPoint.style.height = currentSize / HOUR_POINT_SCALE + 'px';
+        hourPoint.style.fontSize = currentSize / FONT_SCALE + 'px';
 
         const radius = currentSize / HOURS_POS_RADIUS_SCALE;
 
@@ -103,8 +110,10 @@ function createHourPoints(clockFace, hoursBlock, currentSize) {
 function createTimeField(clockFace, currentSize) {
     const timeField = clockFace.querySelector('.time-field');
     timeField.hidden = false;
+    timeField.style.fontSize = currentSize / FONT_SCALE + 'px';
     timeField.style.top = currentSize / 2 + 'px';
     timeField.style.left = clockFace.offsetLeft + clockFace.offsetWidth / 2 - timeField.offsetWidth / 2 + 'px';
+    
 }
 
 // обновление цифрового времени
@@ -134,28 +143,14 @@ function createHourArrow(clockFace, currentSize) {
     const arrow = clockFace.querySelector('.hour-arrow');
     arrow.hidden = false;
 
-    arrow.style.height = currentSize / HOUR_ARROW_SCALE + 'px';
+    arrow.style.height = currentSize / HOUR_ARROW_SCALE_H + 'px';
+    arrow.style.width = currentSize / HOUR_ARROW_SCALE_W + 'px';
 
     arrow.style.left = clockFace.offsetLeft + clockFace.offsetWidth / 2 + 'px';
     arrow.style.top = clockFace.offsetTop + clockFace.offsetHeight / 2 - arrow.offsetHeight + 'px';
-
-    // const shift = DEG_IN_CIRCLE / MINUTES_IN_DAY;
-    // const hours = new Date().getHours() > CLOCK_SYSTEM ? new Date().getHours() - CLOCK_SYSTEM : new Date().getHours();
-    // const minutes = hours * MINUTES_IN_HOUR + new Date().getMinutes();
-
-    // let currentPos = minutes * shift;
-
-    // arrow.style.transform = `rotate(${currentPos}deg)`;
-
-    // setInterval(() => {
-    //     if (currentPos == DEG_IN_CIRCLE) {
-    //         currentPos = 0;
-    //     }
-    //     currentPos += shift;
-    //     arrow.style.transform = `rotate(${currentPos}deg)`;
-    // }, HOUR_ARROW_INTERVAL)
 }
 
+// позиционирование часовой стрелки
 function posHourArrow(hourValue,minuteValue,secondValue){
     const arrow = document.querySelector('.hour-arrow');
 
@@ -172,30 +167,19 @@ function posHourArrow(hourValue,minuteValue,secondValue){
     arrow.style.transform = `rotate(${currentPos}deg)`;
 }
 
+// создание минутной стрелки
 function createMinuteArrow(clockFace, currentSize) {
     const arrow = clockFace.querySelector('.minute-arrow');
     arrow.hidden = false;
 
-    arrow.style.height = currentSize / MINUTE_ARROW_SCALE + "px";
+    arrow.style.height = currentSize / MINUTE_ARROW_SCALE_H + "px";
+    arrow.style.width = currentSize / MINUTE_ARROW_SCALE_W  + 'px';
 
     arrow.style.left = clockFace.offsetLeft + clockFace.offsetWidth / 2 + 'px';
     arrow.style.top = clockFace.offsetTop + clockFace.offsetHeight / 2 - arrow.offsetHeight + 'px';
-
-    // const shift = DEG_IN_CIRCLE / MINUTES_IN_HOUR;
-    // let currentPos = new Date().getMinutes() * shift;
-
-    // arrow.style.transform = `rotate(${currentPos}deg)`;
-
-    // setInterval(() => {
-    //     if (currentPos == DEG_IN_CIRCLE) {
-    //         currentPos = 0;
-    //     }
-    //     currentPos += shift;
-    //     arrow.style.transform = `rotate(${currentPos}deg)`;
-    // }, MINUTE_ARROW_INTERVAL)
-
 }
 
+// позиционирование минутной стрелки
 function posMinuteArrow(minuteValue,secondValue) {
     const arrow = document.querySelector('.minute-arrow');
 
@@ -210,29 +194,19 @@ function posMinuteArrow(minuteValue,secondValue) {
     arrow.style.transform = `rotate(${currentPos}deg)`;
 }
 
+// создание секундной стрелки
 function createSecondArrow(clockFace, currentSize) {
     const arrow = clockFace.querySelector('.second-arrow');
     arrow.hidden = false;
 
-    arrow.style.height = currentSize / SECOND_ARROW_SCALE + 'px';
+    arrow.style.height = currentSize / SECOND_ARROW_SCALE_H + 'px';
+    arrow.style.width = currentSize / SECOND_ARROW_SCALE_W + 'px';
 
     arrow.style.left = clockFace.offsetLeft + clockFace.offsetWidth / 2 + 'px';
     arrow.style.top = clockFace.offsetTop + clockFace.offsetHeight / 2 - arrow.offsetHeight + 'px';
-
-    // const shift = DEG_IN_CIRCLE / SECONDS_IN_MINUTE;
-    // let currentPos = new Date().getSeconds() * shift;
-
-    // arrow.style.transform = `rotate(${currentPos}deg)`;
-
-    // setInterval(() => {
-    //     if (currentPos == DEG_IN_CIRCLE) {
-    //         currentPos = 0;
-    //     }
-    //     currentPos += shift;
-    //     arrow.style.transform = `rotate(${currentPos}deg)`;
-    // }, SECOND_ARROW_INTERVAL);
 }
 
+// позиционирование секундной стрелки
 function posSecondArrow(secondValue) {
     const arrow = document.querySelector('.second-arrow');
 
@@ -243,4 +217,22 @@ function posSecondArrow(secondValue) {
         currentPos = 0;
     }
     arrow.style.transform = `rotate(${currentPos}deg)`;
+}
+
+// функция дебоунсинга вывода времени
+function debounceSerie(func,interval,immediate) {
+    let timer;
+    return function() {
+        let context=this, args=arguments;
+        let later=function() {
+            timer=null;
+            if ( !immediate )
+                func.apply(context,args);
+        };
+        let callNow=immediate&&!timer;
+        clearTimeout(timer);
+        timer=setTimeout(later,interval);
+        if ( callNow )
+            func.apply(context,args);
+    };
 }
