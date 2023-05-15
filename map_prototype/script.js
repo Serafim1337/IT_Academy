@@ -38,5 +38,8 @@ function func(item) {
   return item * 10;
 }
 
-let result3 = [1,2,3].__map();
+let result3 = [].__map((item)=>item*item);
 console.log(result3);
+
+let result4 = [1,2,3].__map();
+console.log(result4);
