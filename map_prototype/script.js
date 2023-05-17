@@ -1,17 +1,5 @@
 function customMap(func){
 
-  try {
-    func.call();
-  } catch (e) {
-    throw new Error ({ 
-          name:        "Custom Map Error", 
-          level:       "Show Stopper", 
-          message:     "check __map method call", 
-          htmlMessage: "check __map method call",
-          toString:    function(){return this.name + ": " + this.message;} 
-        })
-  }
-
   let array = this;
   let result = [];
 
