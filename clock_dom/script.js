@@ -67,7 +67,7 @@ function globalTimeHandler() {
     const minuteValue = currentTime.getMinutes();
     const secondValue = currentTime.getSeconds();
 
-    debounceSerie(updateTime(hourValue, minuteValue, secondValue),1000,false);
+    updateTime(hourValue, minuteValue, secondValue);
 
     posHourArrow(hourValue,minuteValue,secondValue);
     posMinuteArrow(minuteValue,secondValue);
@@ -214,22 +214,4 @@ function posSecondArrow(secondValue) {
         currentPos = 0;
     }
     arrow.style.transform = `rotate(${currentPos}deg)`;
-}
-
-// функция дебоунсинга вывода времени
-function debounceSerie(func,interval,immediate) {
-    let timer;
-    return function() {
-        let context=this, args=arguments;
-        let later=function() {
-            timer=null;
-            if ( !immediate )
-                func.apply(context,args);
-        };
-        let callNow=immediate&&!timer;
-        clearTimeout(timer);
-        timer=setTimeout(later,interval);
-        if ( callNow )
-            func.apply(context,args);
-    };
 }
