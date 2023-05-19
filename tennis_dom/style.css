@@ -1,0 +1,42 @@
+.main {
+    margin: 0 auto;
+    width: 600px;
+    display: grid;
+    grid-template-rows: 50px 500px;
+}
+
+.controls {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(3,1fr);
+    place-items: center;
+}
+
+.game-field {
+    width: 600px;
+    height: 500px;
+    background-color: yellow;
+    position: relative;
+}
+
+.player-green {
+position: absolute;
+width: 20px;
+height: 120px;
+background-color: green;
+}
+
+.player-blue {
+position: absolute;
+width: 20px;
+height: 120px;
+background-color: blue;
+}
+
+.ball {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: red;
+}
