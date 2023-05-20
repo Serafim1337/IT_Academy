@@ -7,6 +7,11 @@ const player1 = document.querySelector('.player-green');
 const player2= document.querySelector('.player-blue');
 const ballElement = document.querySelector('.ball');
 
+let gameState = 0;
+// 0 - before start
+// 1 - playing
+// 2 - goal scored and game paused
+
 const fieldCords = {
     height : gameField.offsetHeight,
     width: gameField.offsetWidth,
@@ -82,33 +87,58 @@ const p2 = {
 
 p2.reset();
 
+const score = {
+    p1 : 0,
+    p2 : 0,
+    add1 : function() {
+        this.p1++;
+        score1.textContent = this.p1;
+    },
+    add2 : function() {
+        this.p2++;
+        score2.textContent = this.p2;
+    }
+}
+
 startButton.addEventListener('click', startGame);
 
 function startGame(e) {
-    ball.reset();
-    p1.reset();
-    p2.reset();
-    tick();
-    this.disabled= true; 
+    switch (gameState) {
+        case 0 : 
+            tick();
+            this.disabled = true;
+            gameState = 1;
+            break;
+        case 2 : 
+            ball.reset();
+            p1.reset();
+            p2.reset();
+            this.disabled= true; 
+            gameState = 1;
+            tick();
+            break;     
+    }
 }
 
 document.addEventListener('keydown', moveStartHandler);
-    
 document.addEventListener('keyup', moveStopHandler); 
-
 
 function moveStartHandler(e) {
     switch(e.code) {
-        case "ArrowUp" : 
+        case "ArrowUp" :
+            e.preventDefault(); 
             p2.speed = -5;
             break;
         case "ArrowDown" :
+            e.preventDefault(); 
             p2.speed = 5;
             break;
         case "ShiftLeft" :
+            e.preventDefault(); 
             p1.speed = -5;
             break;
         case 'ControlLeft' :
+            e.preventDefault(); 
             p1.speed = 5;
             break;        
     }
@@ -118,18 +148,48 @@ function moveStopHandler(e) {
     switch(e.code) {
         case "ArrowUp" : 
         case "ArrowDown" :
+            e.preventDefault(); 
             p2.speed = 0;
             break;
         case "ShiftLeft" :
         case 'ControlLeft' :
+            e.preventDefault(); 
             p1.speed = 0;
             break;        
     }
 }
 
-let globalTimer = null;
-
 function tick () {
+
+    if(gameState == 2) {
+        return;
+    }
+
+    playersMoveController();
+
+    ballMoveController();
+
+    wallCollisionController();
+
+    playerCollisionController();
+
+    window.requestAnimationFrame(tick);
+}
+
+function stopGame() {
+    startButton.disabled = false;
+    gameState = 2;
+}
+
+function playerLimit(player) {
+    if(player.y < 0) {
+        player.y = 0
+    } else if(player.y > fieldCords.height - player.height) {
+        player.y = fieldCords.height -player.height;
+    }
+}
+
+function playersMoveController() {
     p1.y +=p1.speed;
     p2.y +=p2.speed;
 
@@ -138,20 +198,23 @@ function tick () {
 
     p1.update();    
     p2.update();
+}
 
+function ballMoveController() {
     ball.x +=ball.speedX;
     ball.y +=ball.speedY;
     ball.update();
+}
 
-    // !walls collision
+function wallCollisionController() {
     if(ball.x < 0) {
-
+        score.add2();
         ball.x = 0
         stopGame();
         return;
 
     } else if (ball.x > fieldCords.width - ball.width) {
-
+        score.add1();
         ball.x = fieldCords.width - ball.width;
         stopGame();
         return;
@@ -167,9 +230,9 @@ function tick () {
         ball.y = fieldCords.height - ball.height;
         ball.speedY = -ball.speedY;
     }
+}
 
-    // !players collision
-
+function playerCollisionController() {
     const player1Collision = {
         axis : ball.x < p1.x + p1.width,
         top : ball.y + ball.height > p1.y,
@@ -188,21 +251,5 @@ function tick () {
 
     if(player2Collision.axis && player2Collision.top && player2Collision.bottom) {
         ball.speedX = -ball.speedX;
-    }
-
-    globalTimer = window.requestAnimationFrame(tick);
-}
-
-function stopGame() {
-    cancelAnimationFrame(globalTimer);
-    timer = null;
-    startButton.disabled = false;
-}
-
-function playerLimit(player) {
-    if(player.y < 0) {
-        player.y = 0
-    } else if(player.y > fieldCords.height - player.height) {
-        player.y = fieldCords.height -player.height;
     }
 }

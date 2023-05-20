@@ -40,3 +40,17 @@ background-color: blue;
     border-radius: 50%;
     background-color: red;
 }
+
+.score {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+}
+
+.start-button {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 20px;
+    background-color: orange;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
