@@ -1,0 +1,30 @@
+body,html {
+    margin: 0;
+}
+
+.button-block {
+    width: fit-content;
+    margin: 0 auto;
+    padding-top: 150px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.button {
+    border: none;
+    padding: 10px;
+    font-weight: 900;
+}
+
+.d {
+    background-color: orange;
+}
+
+.m {
+background-color: blueviolet;
+}
+
+.button:hover {
+    cursor: pointer;
+}
