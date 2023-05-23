@@ -104,18 +104,17 @@ startButton.addEventListener('click', startGame);
 
 function startGame(e) {
     switch (gameState) {
-        case 0 : 
+        case 0 : //start
             tick();
             this.disabled = true;
             gameState = 1;
             break;
-        case 2 : 
+        case 2 : //restart
             ball.reset();
             p1.reset();
             p2.reset();
             this.disabled= true; 
             gameState = 1;
-            tick();
             break;     
     }
 }
@@ -161,17 +160,17 @@ function moveStopHandler(e) {
 
 function tick () {
 
-    if(gameState == 2) {
-        return;
+    if(gameState != 2) { //if game is not paused by goal
+  
+        playersMoveController();
+
+        ballMoveController();
+
+        wallCollisionController();
+
+        playerCollisionController();
+
     }
-
-    playersMoveController();
-
-    ballMoveController();
-
-    wallCollisionController();
-
-    playerCollisionController();
 
     window.requestAnimationFrame(tick);
 }
